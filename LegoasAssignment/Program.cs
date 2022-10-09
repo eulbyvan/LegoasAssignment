@@ -1,7 +1,13 @@
+using LegoasAssignment.Models.SQLServer;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<LegoasDbContext>(options =>
+    options.UseSqlServer(builder.Configuration
+    .GetConnectionString("LegoasConnectionString")));
 
 var app = builder.Build();
 
