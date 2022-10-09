@@ -52,6 +52,12 @@ namespace LegoasAssignment.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add(AddUserViewModel req)
         {
@@ -89,16 +95,44 @@ namespace LegoasAssignment.Controllers
             return RedirectToAction("Add");
         }
 
-        [HttpGet]
-        public IActionResult Login()
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel req)
         {
-            return View();
+            return RedirectToAction(nameof(Login));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> GetUser(UpdateUserViewModel req)
         {
-            return RedirectToAction(nameof(Login));
+            var user = await legoasDbContext.Users.FindAsync(req.Id);
+            var account = await legoasDbContext.Accounts.FindAsync(req.Id);
+
+            if (user != null)
+            {
+                user.Fullname = req.Fullname;
+                user.Username = req.Username;
+                user.Address = req.Address;
+                user.ZipCode = req.ZipCode;
+                user.Province = req.Province;
+
+                account.Username = req.Username;
+                account.Password = req.NewPassword;
+
+                //if (req.NewPassword != null && currentPassword != null)
+                //{
+                //    account.Password = req.NewPassword;
+                //}
+                //else if (req.NewPassword != null && currentPassword == null)
+                //{
+                //    return RedirectToAction("GetUsers");
+                //}
+
+                await legoasDbContext.SaveChangesAsync();
+
+                return RedirectToAction("GetUsers");
+            }
+
+            return RedirectToAction("GetUsers");
         }
     }
 }

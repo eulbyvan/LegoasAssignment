@@ -68,10 +68,22 @@
             <select class="form-select" asp-items="Model.BranchesSelectList"></select>
             </div>*@
             <div class="mb-3">
-                <label for="Password" class="form-label">Password</label>
-                <input type="password" class="form-control" asp-for="Password" placeholder="Enter Password">
+                <label for="CurrentPassword" class="form-label">Current Password</label>
+                <input type="password" class="form-control" asp-for="CurrentPassword" placeholder="Enter Current Password">
                 <div class="msg">
-                    <span asp-validation-for="Password" class="err"></span>
+                    <span asp-validation-for="CurrentPassword" class="err"></span>
+                </div>
+
+                @if (TempData["msg"] != null)
+                {
+                    <div class="err">@TempData["msg"]</div>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="NewPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control" asp-for="NewPassword" placeholder="Enter New Password">
+                <div class="msg">
+                    <span asp-validation-for="NewPassword" class="err"></span>
                 </div>
 
                 @if (TempData["msg"] != null)

@@ -15,9 +15,9 @@ namespace LegoasAssignment.Models.ViewModels
         //public List<SelectListItem>? BranchesSelectList { get; set; }
         //public int? ScreenId { get; set; }
         [Required]
-        public string Password { get; set; }
-        [Required]
-        [Compare("Password")]
+        public string CurrentPassword { get; set; }
+        public string NewPassword { get; set; }
+        [Compare("NewPassword")]
         public string ConfirmPassword { get; set; }
     }
 }
