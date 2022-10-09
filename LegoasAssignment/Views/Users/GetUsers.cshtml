@@ -1,0 +1,33 @@
+﻿@model List<LegoasAssignment.Models.SQLServer.User>
+
+@{
+}
+
+<h1>Users</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Post Code</th>
+            <th>Province</th>
+            <th>Branch</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Fullname</td>
+                <td>@user.Username</td>
+                <td>@user.Address</td>
+                <td>@user.ZipCode</td>
+                <td>@user.Province</td>
+                <td><a href="GetUser/@user.Id">View</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

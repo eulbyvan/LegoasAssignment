@@ -1,4 +1,4 @@
-﻿@model LegoasAssignment.Models.ViewModels.AddUserViewModel
+﻿@model LegoasAssignment.Models.ViewModels.UpdateUserViewModel
 
 @{
     Layout = null;
@@ -30,8 +30,12 @@
         </nav>
     </header>
     <div class="col-md-6 offset-md-3">
-        <h1>Registration</h1>
-        <form method="post" asp-action="Add" class="mt-5">
+        <h1>Update User</h1>
+        <form method="post" asp-action="GetUser" class="mt-5">
+            <div class="mb-3">
+                <label for="Id" class="form-label">Id</label>
+                <input type="text" class="form-control" asp-for="Id" readonly>
+            </div>
             <div class="mb-3">
                 <label for="Fullname" class="form-label">Fullname</label>
                 <input type="text" class="form-control" asp-for="Fullname" placeholder="Enter Fullname">
@@ -87,8 +91,8 @@
                     <div class="err">@TempData["msg"]</div>
                 }
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-            <a class="btn btn-secondary" href="/Users/Login">Login</a>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a class="btn btn-secondary" href="/Users/GetUsers">Back</a>
         </form>
     </div>
 </body>

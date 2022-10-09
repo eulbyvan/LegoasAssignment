@@ -3,6 +3,7 @@ using LegoasAssignment.Models.SQLServer;
 using LegoasAssignment.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace LegoasAssignment.Controllers
 {
@@ -13,6 +14,36 @@ namespace LegoasAssignment.Controllers
         public UsersController(LegoasDbContext legoasDbContext)
         {
             this.legoasDbContext = legoasDbContext;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await legoasDbContext.Users.ToListAsync();
+
+            return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUser(int Id)
+        {
+            var user = await legoasDbContext.Users.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (user != null)
+            {
+                var updateUserVM = new UpdateUserViewModel()
+                {
+                    Fullname = user.Fullname,
+                    Username = user.Username,
+                    Address = user.Address,
+                    ZipCode = user.ZipCode,
+                    Province = user.Province,
+                };
+
+                return View(updateUserVM);
+            }
+
+            return RedirectToAction("GetUsers");
         }
 
         [HttpGet]
@@ -41,7 +72,7 @@ namespace LegoasAssignment.Controllers
                 Address = req.Address,
                 ZipCode = req.ZipCode,
                 Province = req.Province,
-                BranchId = req.SelectedBranch
+                //BranchId = req.SelectedBranch
             };
 
             var account = new Account()
@@ -56,6 +87,18 @@ namespace LegoasAssignment.Controllers
             await legoasDbContext.SaveChangesAsync();
 
             return RedirectToAction("Add");
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            return RedirectToAction(nameof(Login));
         }
     }
 }
