@@ -1,18 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model LegoasAssignment.Models.ViewModels.AddUserViewModel
+
 @{
 }
 
-<form method="post" action="Add">
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Fullname</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="col-md-6 offset-md-3">
+    <h1>Registration</h1>
+    <form method="post" action="Add" class="mt-5">
+        <div class="mb-3">
+            <label for="" class="form-label">Fullname</label>
+            <input type="text" class="form-control" asp-for="Fullname">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Username</label>
+            <input type="text" class="form-control" asp-for="Username">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Address</label>
+            <input type="text" class="form-control" asp-for="Address">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Zip Code</label>
+            <input type="text" class="form-control" asp-for="ZipCode">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Province</label>
+            <input type="text" class="form-control" asp-for="Province">
+        </div>
+        @*<div class="mb-3">
+            <label class="form-label">Select Branch</label>
+            <select class="form-select" asp-items="Model.BranchesSelectList"></select>
+        </div>*@
+        <div class="mb-3">
+            <label for="" class="form-label">Password</label>
+            <input type="password" class="form-control" asp-for="Password">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" asp-for="ConfirmPassword">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
