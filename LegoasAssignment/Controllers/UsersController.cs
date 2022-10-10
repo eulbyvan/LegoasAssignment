@@ -106,6 +106,8 @@ namespace LegoasAssignment.Controllers
         {
             var user = await legoasDbContext.Users.FindAsync(req.Id);
             var account = await legoasDbContext.Accounts.FindAsync(req.Id);
+            //var username = await legoasDbContext.Accounts.FirstOrDefaultAsync(x => x.Username == req.Username);
+            var currentPassword = await legoasDbContext.Accounts.FirstOrDefaultAsync(x => x.Password == req.CurrentPassword);
 
             if (user != null)
             {
@@ -116,16 +118,15 @@ namespace LegoasAssignment.Controllers
                 user.Province = req.Province;
 
                 account.Username = req.Username;
-                account.Password = req.NewPassword;
 
-                //if (req.NewPassword != null && currentPassword != null)
-                //{
-                //    account.Password = req.NewPassword;
-                //}
-                //else if (req.NewPassword != null && currentPassword == null)
-                //{
-                //    return RedirectToAction("GetUsers");
-                //}
+                if (req.NewPassword != null && currentPassword != null)
+                {
+                    account.Password = req.NewPassword;
+                }
+                else if (req.NewPassword != null && currentPassword == null)
+                {
+                    return RedirectToAction("GetUsers");
+                }
 
                 await legoasDbContext.SaveChangesAsync();
 
